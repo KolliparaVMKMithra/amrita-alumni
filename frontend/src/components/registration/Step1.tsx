@@ -55,22 +55,22 @@ export default function Step1({ data, onChange }: Props) {
           <input className="form-input" value={data.full_name || ""} onChange={e => onChange({ full_name: e.target.value })} placeholder="Your full name" />
         </div>
         <div>
-          <label className="form-label">Gender</label>
+          <label className="form-label">Gender *</label>
           <select className="form-input" value={data.gender || ""} onChange={e => onChange({ gender: e.target.value })}>
             <option value="">Select gender</option>
             <option>Male</option><option>Female</option><option>Non-binary</option><option>Prefer not to say</option>
           </select>
         </div>
         <div>
-          <label className="form-label">Date of Birth</label>
+          <label className="form-label">Date of Birth *</label>
           <input type="date" className="form-input" value={data.date_of_birth || ""} onChange={e => onChange({ date_of_birth: e.target.value })} />
         </div>
         <div>
-          <label className="form-label">Student ID / Roll Number</label>
+          <label className="form-label">Student ID / Roll Number *</label>
           <input className="form-input" value={data.student_id || ""} onChange={e => onChange({ student_id: e.target.value })} placeholder="e.g. AM.EN.U4CSE21001" />
         </div>
         <div>
-          <label className="form-label">Nationality</label>
+          <label className="form-label">Nationality *</label>
           <input className="form-input" value={data.nationality || ""} onChange={e => onChange({ nationality: e.target.value })} placeholder="e.g. Indian" />
         </div>
       </div>

@@ -19,15 +19,15 @@ export default function Step5({ data, onChange }: Props) {
       {!na && (
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1.25rem" }}>
           <div style={{ gridColumn: "1 / -1" }}>
-            <label className="form-label">University Name</label>
+            <label className="form-label">University Name *</label>
             <input className="form-input" value={data.higher_edu_university || ""} onChange={e => onChange({ higher_edu_university: e.target.value })} placeholder="University name" />
           </div>
           <div>
-            <label className="form-label">Country</label>
+            <label className="form-label">Country *</label>
             <input className="form-input" value={data.higher_edu_country || ""} onChange={e => onChange({ higher_edu_country: e.target.value })} placeholder="Country" />
           </div>
           <div>
-            <label className="form-label">Degree Pursued</label>
+            <label className="form-label">Degree Pursued *</label>
             <select className="form-input" value={data.higher_edu_degree || ""} onChange={e => onChange({ higher_edu_degree: e.target.value })}>
               <option value="">Select degree</option>
               {["M.Tech","M.S","MBA","PhD","M.Sc","M.E","LLM","MD","Other"].map(d => <option key={d}>{d}</option>)}
@@ -38,7 +38,7 @@ export default function Step5({ data, onChange }: Props) {
             <input className="form-input" value={data.higher_edu_specialization || ""} onChange={e => onChange({ higher_edu_specialization: e.target.value })} placeholder="e.g. Machine Learning" />
           </div>
           <div>
-            <label className="form-label">Admission Year</label>
+            <label className="form-label">Admission Year *</label>
             <select className="form-input" value={data.higher_edu_admission_year || ""} onChange={e => onChange({ higher_edu_admission_year: parseInt(e.target.value) })}>
               <option value="">Select year</option>
               {YEARS.slice().reverse().map(y => <option key={y}>{y}</option>)}

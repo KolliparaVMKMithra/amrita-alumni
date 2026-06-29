@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Toaster } from "react-hot-toast";
 import { AuthProvider } from "@/lib/auth-context";
+import Footer from "@/components/Footer";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -27,7 +28,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body>
         <AuthProvider>
-          {children}
+          <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
+            <div style={{ flex: "1 0 auto" }}>
+              {children}
+            </div>
+            <Footer />
+          </div>
           <Toaster
             position="top-right"
             toastOptions={{

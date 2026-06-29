@@ -17,8 +17,8 @@ export default function Step6({ data, onChange }: Props) {
       </div>
       {!na && (
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1.25rem" }}>
-          <div><label className="form-label">Startup Name</label><input className="form-input" value={data.startup_name || ""} onChange={e => onChange({ startup_name: e.target.value })} placeholder="Your startup name" /></div>
-          <div><label className="form-label">Domain / Industry</label><input className="form-input" value={data.domain || ""} onChange={e => onChange({ domain: e.target.value })} placeholder="e.g. EdTech, FinTech" /></div>
+          <div><label className="form-label">Startup Name *</label><input className="form-input" value={data.startup_name || ""} onChange={e => onChange({ startup_name: e.target.value })} placeholder="Your startup name" /></div>
+          <div><label className="form-label">Domain / Industry *</label><input className="form-input" value={data.domain || ""} onChange={e => onChange({ domain: e.target.value })} placeholder="e.g. EdTech, FinTech" /></div>
           <div><label className="form-label">Website URL</label><input className="form-input" value={data.website || ""} onChange={e => onChange({ website: e.target.value })} placeholder="https://yourstartup.com" /></div>
           <div>
             <label className="form-label">Funding Status</label>

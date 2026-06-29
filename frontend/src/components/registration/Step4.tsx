@@ -47,8 +47,8 @@ export default function Step4({ data, onChange }: Props) {
         </div>
 
         {status === "Employed" && (<>
-          <div><label className="form-label">Current Company</label><input className="form-input" value={data.current_company || ""} onChange={e => onChange({ current_company: e.target.value })} placeholder="Company name" /></div>
-          <div><label className="form-label">Designation</label><input className="form-input" value={data.designation || ""} onChange={e => onChange({ designation: e.target.value })} placeholder="e.g. Software Engineer" /></div>
+          <div><label className="form-label">Current Company *</label><input className="form-input" value={data.current_company || ""} onChange={e => onChange({ current_company: e.target.value })} placeholder="Company name" /></div>
+          <div><label className="form-label">Designation *</label><input className="form-input" value={data.designation || ""} onChange={e => onChange({ designation: e.target.value })} placeholder="e.g. Software Engineer" /></div>
           <div>
             <label className="form-label">Industry Sector</label>
             <select className="form-input" value={data.industry_sector || ""} onChange={e => onChange({ industry_sector: e.target.value })}>

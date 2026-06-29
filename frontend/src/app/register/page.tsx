@@ -139,7 +139,57 @@ export default function RegisterPage() {
     return current - 1;
   };
 
+  const validateStep = (step: number): boolean => {
+    const d = formData;
+    if (step === 1) {
+      if (!d.full_name?.trim()) { toast.error("Full Name is required"); return false; }
+      if (!d.gender) { toast.error("Gender is required"); return false; }
+      if (!d.date_of_birth) { toast.error("Date of Birth is required"); return false; }
+      if (!d.student_id?.trim()) { toast.error("Student ID / Roll Number is required"); return false; }
+      if (!d.nationality?.trim()) { toast.error("Nationality is required"); return false; }
+    }
+    if (step === 2) {
+      if (!d.mobile?.trim() || d.mobile.trim().split(" ").slice(1).join("").length === 0) {
+        toast.error("Mobile Number is required"); return false;
+      }
+      if (!d.alternate_email?.trim()) { toast.error("Alternate Email is required"); return false; }
+      if (!d.current_address?.trim()) { toast.error("Current Address is required"); return false; }
+      if (!d.city?.trim()) { toast.error("City is required"); return false; }
+      if (!d.state?.trim()) { toast.error("State is required"); return false; }
+      if (!d.country) { toast.error("Country is required"); return false; }
+      if (!d.pin_code?.trim()) { toast.error("PIN Code is required"); return false; }
+    }
+    if (step === 3) {
+      if (!d.university_name?.trim()) { toast.error("University / College Name is required"); return false; }
+      if (!d.campus) { toast.error("Campus is required"); return false; }
+      if (!d.department) { toast.error("Branch / Department is required"); return false; }
+      if (!d.program?.trim()) { toast.error("Program / Course is required"); return false; }
+      if (!d.degree) { toast.error("Degree is required"); return false; }
+      if (!d.batch_year) { toast.error("Batch / Passing Year is required"); return false; }
+      if (!d.admission_year) { toast.error("Admission Year is required"); return false; }
+    }
+    if (step === 4) {
+      if (!d.employment_status) { toast.error("Employment Status is required"); return false; }
+      if (d.employment_status === "Employed") {
+        if (!d.current_company?.trim()) { toast.error("Current Company is required"); return false; }
+        if (!d.designation?.trim()) { toast.error("Designation is required"); return false; }
+      }
+    }
+    if (step === 5 && d.employment_status === "Higher Studies" && !d.higher_edu_na) {
+      if (!d.higher_edu_university?.trim()) { toast.error("University Name is required"); return false; }
+      if (!d.higher_edu_country?.trim()) { toast.error("Country is required"); return false; }
+      if (!d.higher_edu_degree) { toast.error("Degree Pursued is required"); return false; }
+      if (!d.higher_edu_admission_year) { toast.error("Admission Year is required"); return false; }
+    }
+    if (step === 6 && d.employment_status === "Entrepreneur" && !d.not_applicable) {
+      if (!d.startup_name?.trim()) { toast.error("Startup Name is required"); return false; }
+      if (!d.domain?.trim()) { toast.error("Domain / Industry is required"); return false; }
+    }
+    return true;
+  };
+
   const handleNext = async () => {
+    if (!validateStep(currentStep)) return;
     const payload = buildStepPayload(currentStep);
     const ok = await saveStep(currentStep, payload);
     if (ok) {

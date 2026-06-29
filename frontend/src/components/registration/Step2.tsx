@@ -115,7 +115,7 @@ export default function Step2({ data, onChange }: Props) {
         
         {/* Mobile Input with Premium Unified Select */}
         <div>
-          <label className="form-label" style={{ fontWeight: 700 }}>Mobile Number</label>
+          <label className="form-label" style={{ fontWeight: 700 }}>Mobile Number *</label>
           <div style={{ 
             display: "flex", 
             alignItems: "center",
@@ -235,7 +235,7 @@ export default function Step2({ data, onChange }: Props) {
 
         {/* Alternate Email */}
         <div>
-          <label className="form-label" style={{ fontWeight: 700 }}>Alternate Email</label>
+          <label className="form-label" style={{ fontWeight: 700 }}>Alternate Email *</label>
           <input 
             type="email" 
             className="form-input input-glow-focus" 
@@ -260,7 +260,7 @@ export default function Step2({ data, onChange }: Props) {
 
         {/* Current Address */}
         <div style={{ gridColumn: "1 / -1" }}>
-          <label className="form-label" style={{ fontWeight: 700 }}>Current Address</label>
+          <label className="form-label" style={{ fontWeight: 700 }}>Current Address *</label>
           <textarea 
             className="form-input input-glow-focus" 
             rows={3} 
@@ -289,24 +289,24 @@ export default function Step2({ data, onChange }: Props) {
 
         {/* City & State */}
         <div>
-          <label className="form-label" style={{ fontWeight: 700 }}>City</label>
+          <label className="form-label" style={{ fontWeight: 700 }}>City *</label>
           <input className="form-input input-glow-focus" value={data.city || ""} onChange={e => onChange({ city: e.target.value })} placeholder="City" style={{ borderRadius: "10px", padding: "0.8rem 1rem", border: "2px solid #e0d8d0", background: "var(--card-bg)", color: "var(--text-primary)" }} />
         </div>
         <div>
-          <label className="form-label" style={{ fontWeight: 700 }}>State</label>
+          <label className="form-label" style={{ fontWeight: 700 }}>State *</label>
           <input className="form-input input-glow-focus" value={data.state || ""} onChange={e => onChange({ state: e.target.value })} placeholder="State" style={{ borderRadius: "10px", padding: "0.8rem 1rem", border: "2px solid #e0d8d0", background: "var(--card-bg)", color: "var(--text-primary)" }} />
         </div>
 
         {/* Country & PIN */}
         <div>
-          <label className="form-label" style={{ fontWeight: 700 }}>Country</label>
+          <label className="form-label" style={{ fontWeight: 700 }}>Country *</label>
           <select className="form-input input-glow-focus" value={data.country || ""} onChange={e => onChange({ country: e.target.value })} style={{ borderRadius: "10px", padding: "0.8rem 1rem", border: "2px solid #e0d8d0", background: "var(--card-bg)", color: "var(--text-primary)" }}>
             <option value="">Select country</option>
             {countries.map(c => <option key={c} value={c}>{c}</option>)}
           </select>
         </div>
         <div>
-          <label className="form-label" style={{ fontWeight: 700 }}>PIN Code</label>
+          <label className="form-label" style={{ fontWeight: 700 }}>PIN Code *</label>
           <input className="form-input input-glow-focus" value={data.pin_code || ""} onChange={e => onChange({ pin_code: e.target.value })} placeholder="600001" maxLength={10} style={{ borderRadius: "10px", padding: "0.8rem 1rem", border: "2px solid #e0d8d0", background: "var(--card-bg)", color: "var(--text-primary)" }} />
         </div>
 
