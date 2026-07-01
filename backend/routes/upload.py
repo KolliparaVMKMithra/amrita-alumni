@@ -41,6 +41,40 @@ async def upload_file(request: Request, file: UploadFile, folder: str, allowed_t
             # Fall back to local storage if Azure upload fails to prevent service crashes
             print(f"[AZURE BLOB ERROR] Failed uploading to Azure, falling back to local: {e}")
 
+    # Check for AWS S3 Storage configuration
+    s3_bucket = os.getenv("AWS_STORAGE_BUCKET_NAME")
+    if s3_bucket:
+        try:
+            import boto3
+            s3_args = {}
+            if os.getenv("AWS_ACCESS_KEY_ID") and os.getenv("AWS_SECRET_ACCESS_KEY"):
+                s3_args["aws_access_key_id"] = os.getenv("AWS_ACCESS_KEY_ID")
+                s3_args["aws_secret_access_key"] = os.getenv("AWS_SECRET_ACCESS_KEY")
+            if os.getenv("AWS_REGION"):
+                s3_args["region_name"] = os.getenv("AWS_REGION")
+                
+            s3_client = boto3.client("s3", **s3_args)
+            s3_key = f"{folder}/{filename}"
+            content_type = file.content_type or "application/octet-stream"
+            content_disposition = "inline" if content_type in ALLOWED_IMAGE_TYPES else "attachment"
+            
+            s3_client.put_object(
+                Bucket=s3_bucket,
+                Key=s3_key,
+                Body=content,
+                ContentType=content_type,
+                ContentDisposition=content_disposition
+            )
+            
+            region = os.getenv("AWS_REGION", "us-east-1")
+            if region == "us-east-1":
+                return f"https://{s3_bucket}.s3.amazonaws.com/{s3_key}"
+            else:
+                return f"https://{s3_bucket}.s3.{region}.amazonaws.com/{s3_key}"
+        except Exception as e:
+            print(f"[AWS S3 ERROR] Failed uploading to S3, falling back: {e}")
+
+
     # Local Storage
     target_dir = os.path.join("uploads", folder)
     os.makedirs(target_dir, exist_ok=True)

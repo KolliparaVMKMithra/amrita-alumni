@@ -1,0 +1,13 @@
+.git
+.gitignore
+node_modules
+venv
+.venv
+__pycache__
+*.pyc
+.next
+out
+uploads
+*.env
+*.env.local
+*.pdf

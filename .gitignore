@@ -59,3 +59,7 @@ coverage.xml
 
 # Local uploads
 uploads/
+
+# AWS Key Pair
+alumni-key.pem
+
