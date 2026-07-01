@@ -55,7 +55,10 @@ export default function RegisterPage() {
         setFormData({
           full_name: d.full_name, email: d.email, gender: d.gender, date_of_birth: d.date_of_birth,
           photo_url: d.photo_url, student_id: d.student_id, nationality: d.nationality,
-          ...d.contact, ...d.academic, ...d.career,
+          ...d.contact, ...d.academic,
+          university_name: d.academic?.university_name || "Amrita Vishwa Vidyapeetham",
+          campus: d.academic?.campus || "Amaravati",
+          ...d.career,
           career_history: d.career?.career_history || [],
           ...d.higher_education, ...d.entrepreneurship, ...d.engagement, ...d.networking, ...d.social,
         });
