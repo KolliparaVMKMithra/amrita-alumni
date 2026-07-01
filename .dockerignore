@@ -8,6 +8,6 @@ __pycache__
 .next
 out
 uploads
-*.env
-*.env.local
+**/*.env
+**/*.env.local
 *.pdf
