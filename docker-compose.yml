@@ -50,7 +50,7 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
       args:
-        - NEXT_PUBLIC_API_BASE_URL=http://44.204.137.225:8000
+        - NEXT_PUBLIC_API_BASE_URL=/
     restart: always
     ports:
       - "80:3000"

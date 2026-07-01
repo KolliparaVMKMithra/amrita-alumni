@@ -5,13 +5,25 @@ import { GraduationCap, Users, Briefcase, Globe, ChevronRight, Star, ArrowRight,
 import api from "@/lib/api";
 
 export default function HomePage() {
-  const [totalAlumni, setTotalAlumni] = useState("10,000+");
+  const [stats, setStats] = useState({
+    totalAlumni: "10,000+",
+    topRecruiters: "500+",
+    globalPresence: "60+",
+    academicBatches: "40+"
+  });
   const [theme, setTheme] = useState("light");
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     api.get("/api/admin/stats/public").then((r) => {
-      if (r.data?.total_alumni) setTotalAlumni(r.data.total_alumni.toLocaleString());
+      if (r.data) {
+        setStats({
+          totalAlumni: (r.data.total_alumni || 10000).toLocaleString() + "+",
+          topRecruiters: (r.data.top_recruiters || 500).toLocaleString() + "+",
+          globalPresence: (r.data.global_presence || 60).toLocaleString() + "+",
+          academicBatches: (r.data.academic_batches || 40).toLocaleString() + "+"
+        });
+      }
     }).catch(() => {});
     
     const activeTheme = localStorage.getItem("theme") || "light";
@@ -88,10 +100,10 @@ export default function HomePage() {
             </div>
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.75rem" }}>
               {[
-                { label: "Total Alumni", value: totalAlumni, color: "#D4A017" },
-                { label: "Top Recruiters", value: "500+" },
-                { label: "Global Presence", value: "60+ Countries" },
-                { label: "Academic Batches", value: "40+" }
+                { label: "Total Alumni", value: stats.totalAlumni, color: "#D4A017" },
+                { label: "Top Recruiters", value: stats.topRecruiters },
+                { label: "Global Presence", value: `${stats.globalPresence} Countries` },
+                { label: "Academic Batches", value: stats.academicBatches }
               ].map((s) => (
                 <div key={s.label} className="glass-card-dark" style={{ borderRadius: 12, padding: "1rem", textAlign: "center", border: "1px solid rgba(255,255,255,0.06)" }}>
                   <div style={{ fontSize: "1.4rem", fontWeight: 800, color: s.color || "white", fontFamily: "Montserrat" }}>{s.value}</div>
