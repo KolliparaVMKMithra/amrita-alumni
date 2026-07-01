@@ -3,22 +3,24 @@ version: "3.8"
 services:
   postgres:
     image: postgres:15
+    restart: always
     environment:
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Mithra@2006
       POSTGRES_DB: alumni_db
     ports:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U user -d alumni_db"]
+      test: ["CMD-SHELL", "pg_isready -U postgres -d alumni_db"]
       interval: 5s
       timeout: 5s
       retries: 5
 
   redis:
     image: redis:7
+    restart: always
     ports:
       - "6379:6379"
     volumes:
@@ -28,17 +30,15 @@ services:
     build:
       context: .
       dockerfile: backend/Dockerfile
-    command: uvicorn backend.main:app --host 0.0.0.0 --port 8000 --reload
+    restart: always
+    command: uvicorn backend.main:app --host 0.0.0.0 --port 8000
     ports:
       - "8000:8000"
     environment:
-      - DATABASE_URL=postgresql+asyncpg://user:password@postgres:5432/alumni_db
+      - DATABASE_URL=postgresql+asyncpg://postgres:Mithra%402006@postgres:5432/alumni_db
       - REDIS_URL=redis://redis:6379/0
-      # Provide other env vars in backend/.env file
     env_file:
       - ./backend/.env
-    volumes:
-      - ./backend:/app/backend
     depends_on:
       postgres:
         condition: service_healthy
@@ -49,19 +49,15 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile
-    command: npm run dev
+      args:
+        - NEXT_PUBLIC_API_BASE_URL=http://44.204.137.225:8000
+    restart: always
     ports:
-      - "3000:3000"
-    environment:
-      - NEXT_PUBLIC_API_BASE_URL=http://localhost:8000
-    env_file:
-      - ./frontend/.env.local
-    volumes:
-      - ./frontend:/app
-      - /app/node_modules
+      - "80:3000"
     depends_on:
       - backend
 
 volumes:
   postgres_data:
   redis_data:
+
